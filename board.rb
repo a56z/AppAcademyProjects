@@ -3,9 +3,21 @@ class Board
         @grid = Array.new(3){Array.new(3,"O")}
     end
 
-    def get_move
+    def choose_field
         puts "Please choose a square to reveal, eg '1,2'"
         response = gets.chomp.to_i
+    end
+
+    def game_over
+        puts "Game Over!" if choose_field.include?("bomb")
+        return true
+    end
+
+    def reveal(pos)
+        if game_over == false
+            row, col = pos
+            puts @grid[row][col]
+        end
     end
 
     def [](pos)
@@ -32,4 +44,8 @@ class Board
     end
 
     def populate
+        @grid.each do |row|
+            puts row.join("X")
+        end
+    end
 end
