@@ -36,6 +36,15 @@ class Board
         arr_to_rev.flatten.populate
     end
 
+    def render(reveal = false)
+        # reveal is used to fully reveal the board at game end
+        @grid.map do |row|
+            row.map do |tile|
+                reveal ? tile.reveal : tile.render
+            end.join("")
+        end.join("\n")
+    end
+
     def neighbor(pos)
         pos.each_with_index do |row, col|
             row.each_with_index do |row2, col2|
