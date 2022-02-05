@@ -19,10 +19,9 @@ class Board
     def won?
         @grid.flatten.all? { |tile| tile.bombed? != tile.explored? }
       end
-      
-    def game_over
-        puts "Game Over!" if choose_field.include?("bomb")
-        return true
+     
+    def lost?
+        @grid.flatten.any? { |tile| tile.bombed? && tile.explored? }
     end
 
     def reveal(pos)
