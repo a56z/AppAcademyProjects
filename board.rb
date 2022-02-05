@@ -16,4 +16,19 @@ class Board
     def []=(pos, val)
         row, col = pos
         @grid[row][col] = val
+    end
+
+    def valid?(pos)
+        row, col = pos
+        pos.all? do |i|
+            0 <= i && i < @grid.length
+        end
+    end
+
+    def empty?(pos)
+        row, col = pos
+        pos.any? do |i|
+            0 <= i && i < @grid.length
+        end
+    end
 end
