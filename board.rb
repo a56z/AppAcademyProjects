@@ -16,6 +16,10 @@ class Board
         response = gets.chomp.to_i
     end
 
+    def won?
+        @grid.flatten.all? { |tile| tile.bombed? != tile.explored? }
+      end
+      
     def game_over
         puts "Game Over!" if choose_field.include?("bomb")
         return true
