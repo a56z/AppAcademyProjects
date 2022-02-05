@@ -46,4 +46,14 @@ class Board
         row, col = pos
         @grid[row][col] = val
     end
+
+    private
+
+    def generate_board
+        @grid.Array.new(@grid_size) do |row|
+            Array.new(@grid_size) { |col| Tile.new(self, [row, col]) }
+        end
+
+        plant_bombs
+    end
 end
