@@ -24,16 +24,8 @@ class Board
         @grid.flatten.any? { |tile| tile.bombed? && tile.explored? }
     end
 
-    def reveal(pos)
-        if game_over == false
-            arr_to_rev = []
-            pos.each_with_index do |el, idx|
-                if el != pos.length - 1 !neighbor(pos).include?(bomb)
-                    arr_to_rev << pos[i] + pos[i+1]
-                end
-            end
-        end
-        arr_to_rev.flatten.populate
+    def reveal
+        render(true)
     end
 
     def render(reveal = false)
