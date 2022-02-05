@@ -37,16 +37,6 @@ class Board
         end.join("\n")
     end
 
-    def neighbor(pos)
-        pos.each_with_index do |row, col|
-            row.each_with_index do |row2, col2|
-                if col2 > col && row[col] == row2[col2]
-                    reveal.pos[row][col]
-                end
-            end
-        end
-    end
-
     def [](pos)
         row, col = pos
         @grid[row][col]
@@ -55,24 +45,5 @@ class Board
     def []=(pos, val)
         row, col = pos
         @grid[row][col] = val
-    end
-
-    def valid?(pos)
-        row, col = pos
-        pos.all? do |i|
-            0 <= i && i < @grid.length
-        end
-    end
-
-    def empty_positions?
-        indices = (0...@grid.length).to_a
-        positions = indices.product(indices)
-        positions.any? { |pos| empty?(pos)}
-    end
-
-    def populate
-        @grid.each do |row|
-            row.join("B") if reveal(pos).include?(reveal.arr_to_rev)
-        end
     end
 end
