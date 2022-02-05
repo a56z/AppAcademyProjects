@@ -1,6 +1,10 @@
 class Board
-    def initialize
-        @grid = Array.new(3){Array.new(3,"O")}
+    attr_reader :grid_size, :num_bombs
+    
+    def initialize(grid_size, num_bombs)
+        @grid_size, num_bombs = grid_size, num_bombs
+
+        generate_board
     end
 
     def bombs
@@ -19,9 +23,14 @@ class Board
 
     def reveal(pos)
         if game_over == false
-            row, col = pos
-            puts @grid[row][col]
+            arr_to_rev = []
+            pos.each_with_index do |el, idx|
+                if el != pos.length - 1 !neighbor(pos).include?(bomb)
+                    arr_to_rev << pos[i] + pos[i+1]
+                end
+            end
         end
+        arr_to_rev.flatten.populate
     end
 
     def neighbor(pos)
@@ -59,7 +68,7 @@ class Board
 
     def populate
         @grid.each do |row|
-            puts row.join("X")
+            row.join("B") if reveal(pos).include?(reveal.arr_to_rev)
         end
     end
 end
