@@ -3,6 +3,10 @@ class Board
         @grid = Array.new(3){Array.new(3,"O")}
     end
 
+    def bombs
+        @bomb = bomb
+    end
+
     def choose_field
         puts "Please choose a square to reveal, eg '1,2'"
         response = gets.chomp.to_i
@@ -17,6 +21,16 @@ class Board
         if game_over == false
             row, col = pos
             puts @grid[row][col]
+        end
+    end
+
+    def neighbor(pos)
+        pos.each_with_index do |row, col|
+            row.each_with_index do |row2, col2|
+                if col2 > col && row[col] == row2[col2]
+                    reveal.pos[row][col]
+                end
+            end
         end
     end
 
