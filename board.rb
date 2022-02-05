@@ -25,10 +25,11 @@ class Board
         end
     end
 
-    def empty?(pos)
-        row, col = pos
-        pos.any? do |i|
-            0 <= i && i < @grid.length
-        end
+    def empty_positions?
+        indices = (0...@grid.length).to_a
+        positions = indices.product(indices)
+        positions.any? { |pos| empty?(pos)}
     end
+
+    def populate
 end
