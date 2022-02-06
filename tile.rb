@@ -63,6 +63,20 @@ class Tile
             end
             adjacent_coords.map { |pos| @board[pos] } 
         end
+        
+        def plant_bomb
+            @bombed = true
+        end
+
+        def render
+            if flagged?
+                "F"
+            elsif explored?
+                adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s 
+            else
+                "*"
+            end
+        end
 
         
 end
