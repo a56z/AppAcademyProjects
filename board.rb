@@ -1,10 +1,11 @@
 require_relative 'tile'
+require "byebug"
 
 class Board
     attr_reader :grid_size, :num_bombs
     
     def initialize(grid_size, num_bombs)
-        @grid_size, num_bombs = grid_size, num_bombs
+        @grid_size, @num_bombs = grid_size, num_bombs
 
         generate_board
     end
@@ -38,7 +39,7 @@ class Board
     private
 
     def generate_board
-        @grid.Array.new(@grid_size) do |row|
+        @grid = Array.new(@grid_size) do |row|
             Array.new(@grid_size) { |col| Tile.new(self, [row, col]) }
         end
 
@@ -47,6 +48,7 @@ class Board
 
     def plant_bombs
         total_bombs = 0
+        
         while total_bombs < @num_bombs
             rand_pos = Array.new(2) { rand(@grid_size) }
 
