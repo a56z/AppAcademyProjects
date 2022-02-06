@@ -32,4 +32,16 @@ class Tile
       def adjacent_bomb_count
         neighbors.select(&:bombed?).count
       end
+
+      def explore
+        #don't explore location user thinks is bombed
+        return self if explored?
+
+        #don't revisit previously explored tiles
+        @explored = true
+        if !bombed && adjacent_bomb_count == 0
+            neighbors.each(&:explore)
+        end
+        self
+    end
 end
