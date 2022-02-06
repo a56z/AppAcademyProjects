@@ -53,5 +53,16 @@ class Tile
                 flagged: flagged?}.inspect
         end
 
+        def neighbors
+            adjacent_coords = DELTAS.map do |(dx, dy)|
+                [pos[0] + dx, pos[1] + dy]
+            end.select do |row, col|
+                [row, col].all? do |coord|
+                    coord.between?(0, @board.grid_size - 1)
+                end
+            end
+            adjacent_coords.map { |pos| @board[pos] } 
+        end
 
+        
 end
