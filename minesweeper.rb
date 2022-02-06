@@ -8,6 +8,9 @@ class MinesweeperGame
         large: { grid_size: 32, num_bombs: 160 } # whoa.
     }.freeze  
     
-
+    def initialize(size)
+        layout = LAYOUTS[size]
+        @board = Board.new(layout[:grid_size], layout[:num_bombs])
+    end
 
 end
