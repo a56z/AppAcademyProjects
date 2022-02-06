@@ -69,33 +69,28 @@ class Tile
         end
 
         def render
-            if flagged?
-                "F"
-            elsif explored?
-                adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s 
-            else
-                "*"
-            end
+            "F"
+        elsif explored?
+            adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s 
+        else
+            "*"
         end
-
-        def reveal
-            #used to fully reveal the board game
-            if flagged?
-                #mark true and false flags
-                bombed? "F" : "f"
-            elsif bombed?
-                explored? "X" : "B"
-            else
-                adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s 
-            end
+    end
+    
+    def reveal
+        #used to fully reveal the board game
+        if flagged?
+            #mark true and false flags
+            bombed? "F" : "f"
+        elsif bombed?
+            explored? "X" : "B"
+        else
+            adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s 
         end
-
-        def toggle_flag
-            # ignore flagging of explored squares
-            @flagged = !@flagged unless @explored
-        end
-
-
-
-        
+    end
+    
+    def toggle_flag
+        # ignore flagging of explored squares
+        @flagged = !@flagged unless @explored
+    end 
 end

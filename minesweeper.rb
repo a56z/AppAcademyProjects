@@ -37,5 +37,15 @@ class MinesweeperGame
         [action_type, [row_s.to_i, col_s.to_i]]
     end
 
-    
+    def perform_move(action_type, pos)
+        tile = @board[pos]
+
+        case action_type
+        when "f"
+            tile.toggle_flag
+        when "e"
+            tile.explore
+        when "s"
+            #won't quit on save
+    end
 end
