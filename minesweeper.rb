@@ -46,6 +46,27 @@ class MinesweeperGame
         when "e"
             tile.explore
         when "s"
-            #won't quit on save
+            #won't quit on save, just hit ctrl-c to do that.
+            save
+        end
+    end
+
+    def save
+        puts "Enter filename to save at:"
+        filename = gets.chomp
+
+        File.write(filename, YAML.dump(self))
+    end
+end
+
+if $PROGRAM_NAME == __FILE__
+    #running as script
+
+    case ARGV.count
+    when 0
+        MinesweeperGame.new(:small).play
+    when 1
+        #resume game, using first argument
+        YAML.load_file(ARGV.shift).play
     end
 end
