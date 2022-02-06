@@ -69,13 +69,14 @@ class Tile
         end
 
         def render
-            "F"
-        elsif explored?
-            adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s 
-        else
-            "*"
+            if flagged?
+                "F"
+            elsif explored?
+                adjacent_bomb_count == 0 ? "_" : adjacent_bomb_count.to_s 
+            else
+                "*"
+            end
         end
-    end
     
     def reveal
         #used to fully reveal the board game

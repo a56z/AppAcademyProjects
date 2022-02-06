@@ -1,3 +1,5 @@
+require_relative 'tile'
+
 class Board
     attr_reader :grid_size, :num_bombs
     
@@ -7,13 +9,9 @@ class Board
         generate_board
     end
 
-    def bombs
-        @bomb = bomb
-    end
-
-    def choose_field
-        puts "Please choose a square to reveal, eg '1,2'"
-        response = gets.chomp.to_i
+    def [](pos)
+        row, col = pos
+        @grid[row][col]
     end
 
     def won?
@@ -37,16 +35,6 @@ class Board
         end.join("\n")
     end
 
-    def [](pos)
-        row, col = pos
-        @grid[row][col]
-    end
-
-    def []=(pos, val)
-        row, col = pos
-        @grid[row][col] = val
-    end
-
     private
 
     def generate_board
@@ -62,7 +50,7 @@ class Board
         while total_bombs < @num_bombs
             rand_pos = Array.new(2) { rand(@grid_size) }
 
-            tile = self(rand_pos)
+            tile = self[rand_pos]
             next if tile.bombed?
 
             tile.plant_bomb
