@@ -28,4 +28,8 @@ class Tile
       def flagged?
         @flagged
       end
+
+      def adjacent_bomb_count
+        neighbors.select(&:bombed?).count
+      end
 end
