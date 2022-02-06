@@ -43,5 +43,15 @@ class Tile
             neighbors.each(&:explore)
         end
         self
-    end
+    end 
+
+        def inspect
+            #avoid information overload and show 
+            #just one tile when inspecting the board
+            {   pos: pos,
+                bombed: bombed?,
+                flagged: flagged?}.inspect
+        end
+
+
 end
